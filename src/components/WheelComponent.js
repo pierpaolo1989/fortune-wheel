@@ -157,15 +157,18 @@ const WheelComponent = ({
   };
 
   return (
-    <div style={{ textAlign: "center", maxWidth: "100%", padding: "0 20px" }}>
+    <div style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}>
       <div className="flex justify-center items-center flex-col w-full">
         <canvas
           ref={canvasRef}
-          width={3 * center}
+          width={2 * center}
           height={2 * center}
           style={{
             width: "100%",
             height: "auto",
+            maxWidth: `${2 * center}px`,
+            display: "block",
+            margin: "0 auto",
             cursor: isSpinning || (isOnlyOnce && hasFinished) ? "default" : "pointer"
           }}
           onClick={spin}
