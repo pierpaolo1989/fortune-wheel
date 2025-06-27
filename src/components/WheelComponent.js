@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle,forwardRef, useRef, useState } from "react";
 
 const MAX_SPIN_TIME = 5000;
 const FULL_ROTATIONS = 5;
 
-const WheelComponent = ({
+const WheelComponent = forwardRef(({
   initialSegments,
   segColors,
   onFinished = () => { },
@@ -13,7 +13,7 @@ const WheelComponent = ({
   contrastColor = "#fff",
   buttonText = "SPIN",
   isOnlyOnce = true
-}) => {
+}, ref) => {
   const [segments, setSegments] = useState(initialSegments);
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(initialSegments.join("\n"));
@@ -156,6 +156,19 @@ const WheelComponent = ({
     }
   };
 
+// ⬇️ Espone la funzione reset al genitore
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      cancelAnimationFrame(animationRef.current);
+      setHasFinished(false);
+      setIsSpinning(false);
+      setAngleCurrent(0);
+      angleRef.current = 0;
+      targetAngleRef.current = 0;
+      drawWheel(0); // Redisegna da zero
+    }
+  }));
+
   return (
     <div style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}>
       <div className="flex justify-center items-center flex-col w-full">
@@ -184,7 +197,7 @@ const WheelComponent = ({
         </button>
       </div>
       {editing && (
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10 }} className="text-center mt-4">
           <textarea
             rows={segments.length + 2}
             value={inputValue}
@@ -202,7 +215,7 @@ const WheelComponent = ({
           <br />
           <button
             onClick={handleSave}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto"
           >
             Salva
           </button>
@@ -210,6 +223,6 @@ const WheelComponent = ({
       )}
     </div>
   );
-};
+});
 
 export default WheelComponent;

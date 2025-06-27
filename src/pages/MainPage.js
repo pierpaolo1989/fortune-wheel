@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import WheelComponent from "../components/WheelComponent";
 
 function MainPage() {
@@ -14,6 +14,7 @@ function MainPage() {
     ];
 
     const [winner, setWinner] = useState(null);
+    const wheelRef = useRef(null);
 
     const handleFinish = (winnerName) => {
         setWinner(winnerName);
@@ -52,7 +53,11 @@ function MainPage() {
 
     const closeModal = () => {
         setWinner(null);
+        if (wheelRef.current) {
+            wheelRef.current?.reset(); 
+        }
     };
+
     return (
         <div className="App-Header">
             <h1 className="text-3xl font-bold">
@@ -63,6 +68,7 @@ function MainPage() {
                 <div id="wheelCircle" className="flex flex-col items-center justify-center">
 
                     <WheelComponent
+                        ref={wheelRef}
                         initialSegments={segments}
                         segColors={segColors}
                         onFinished={handleFinish} primaryColor="#2d3436"
