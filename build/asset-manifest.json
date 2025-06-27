@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fortune-wheel/static/css/main.bcbc93b6.css",
+    "main.js": "/fortune-wheel/static/js/main.8e63a65e.js",
+    "static/js/453.2d6531fd.chunk.js": "/fortune-wheel/static/js/453.2d6531fd.chunk.js",
+    "index.html": "/fortune-wheel/index.html",
+    "main.bcbc93b6.css.map": "/fortune-wheel/static/css/main.bcbc93b6.css.map",
+    "main.8e63a65e.js.map": "/fortune-wheel/static/js/main.8e63a65e.js.map",
+    "453.2d6531fd.chunk.js.map": "/fortune-wheel/static/js/453.2d6531fd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bcbc93b6.css",
+    "static/js/main.8e63a65e.js"
+  ]
+}
